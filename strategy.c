@@ -209,17 +209,34 @@ move minMaxHeuristic(int player, board bd, int max_depth) {
 
         free(temp.bd);
 
-        int max_idx = 0;
-        int max_score = scores[0];
+        if (1 == player) {
+                // We look for the best move, so the max of the scores
+            int max_idx = 0;
+            int max_score = scores[0];
 
-        for (int i = 1; i < possible_moves.size; i++) {
-            if (scores[i] > max_score) {
-                max_idx = i;
-                max_score = scores[i];
+            for (int i = 1; i < possible_moves.size; i++) {
+                if (scores[i] > max_score) {
+                    max_idx = i;
+                    max_score = scores[i];
+                }
             }
-        }
 
-        return possible_moves.tab[max_idx];
+            return possible_moves.tab[max_idx];
+
+        } else {
+            // The other player is playing and we want assume that he's choosing the best score for him, so we look for the min
+            int min_idx = 0;
+            int min_score = scores[0];
+
+            for (int i = 1; i < possible_moves.size; i++) {
+                if (scores[i] > min_score) {
+                    min_idx = i;
+                    min_score = scores[i];
+                }
+            }
+
+            return possible_moves.tab[min_idx];
+        }
 
         
     }
