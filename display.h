@@ -3,6 +3,6 @@
 
 #include "utils.h"
 
-void showBoard(board bd);
+void showBoard(board bd, bool first_iteration);
 
 #endif

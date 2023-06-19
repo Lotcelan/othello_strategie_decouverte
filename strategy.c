@@ -50,9 +50,21 @@ move_size getPossibleMoves(int turn, board bd) {
 
 }
 
-bool isEndingState(board bd) {
-    return ((getPossibleMoves(1, bd).size == 0) && (getPossibleMoves(2, bd).size == 0));
+
+bool canPlayerMove(int player, board bd) {
+    return getPossibleMoves(player, bd).size != 0;
 }
+
+bool isPlayerWinning(int player, board bd) {
+    int score = getScore(bd);
+    return ((player == 1) ?  score > 0 : score < 0);
+}
+
+bool isEndingState(board bd) {
+    return !canPlayerMove(1, bd) && !canPlayerMove(2, bd);
+}
+
+
 
 int getScore(board bd) {
     int player_one_count = 0;

@@ -2,7 +2,7 @@
 
 
 move choseMove(int player, board bd) {
-    return minMaxHeuristic(player, bd, 1);
+    return minMaxHeuristic(player, bd, 6);
 }
 
 void runGame(bool onlyAI, int row_count, int col_count) {
@@ -14,7 +14,7 @@ void runGame(bool onlyAI, int row_count, int col_count) {
 
     board bd = initBoard(row_count, col_count);
 
-    showBoard(bd);
+    showBoard(bd, true);
 
     while (!should_close) {
         
@@ -51,20 +51,24 @@ void runGame(bool onlyAI, int row_count, int col_count) {
         // Update the board accordingly
         updateBoard(player_one_move, bd);
 
+        showBoard(bd, false);
+
+
         /* PLAYER TWO PLAYING */
 
         player_two_move = choseMove(2, bd);
         updateBoard(player_two_move, bd);
 
-        /* DISPLAYING */
-
-        showBoard(bd);
+        showBoard(bd, false);
 
         /* ENDING TURN */
-
         if (isEndingState(bd)) {
+            if (isPlayerWinning(1, bd)) {
+                printf("Player 1 won !\n");
+            } else if (isPlayerWinning(2, bd)) {
+                printf("Player 2 won !\n");
+            }
             should_close = true;
         }
-
     }
 }
