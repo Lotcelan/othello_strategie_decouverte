@@ -20,45 +20,51 @@ void runGame(bool onlyAI, int row_count, int col_count) {
         
         /* PLAYER ONE PLAYING */
 
-        // Make the player chose his next move, if player there is
-        if (!onlyAI) {
-            move_chosen = false;
+        if (canPlayerMove(1, bd)) {
 
-            while (!move_chosen) {
-                int user_row, user_col;
+            // Make the player chose his next move, if player there is
+            if (!onlyAI) {
+                move_chosen = false;
 
-                printf("Provide a row : ");
-                scanf("%i"   , &user_row);
-                printf(", and a column : ");
-                scanf("%i", &user_col);
-                printf("\n");
+                while (!move_chosen) {
+                    int user_row, user_col;
 
-                player_one_move.row = user_row;
-                player_one_move.col = user_col;
+                    printf("Provide a row : ");
+                    scanf("%i"   , &user_row);
+                    printf(", and a column : ");
+                    scanf("%i", &user_col);
+                    printf("\n");
 
-                if (!moveIsPossible(player_one_move, bd)) {
-                    printf("Invalid move\n");
-                } else {
-                    move_chosen = true;
+                    player_one_move.row = user_row;
+                    player_one_move.col = user_col;
+
+                    if (!moveIsPossible(player_one_move, bd)) {
+                        printf("Invalid move\n");
+                    } else {
+                        move_chosen = true;
+                    }
                 }
             }
-        }
-        // Or else let the AI decide
-        else {
-            player_one_move = choseMove(1, bd);
-        }
+            // Or else let the AI decide
+            else {
+                player_one_move = choseMove(1, bd);
+            }
 
-        // Update the board accordingly
-        updateBoard(player_one_move, bd);
-
+            // Update the board accordingly
+            updateBoard(player_one_move, bd);
+        } else {
+            continue;
+        }
         showBoard(bd, false);
 
 
         /* PLAYER TWO PLAYING */
 
-        player_two_move = choseMove(2, bd);
-        updateBoard(player_two_move, bd);
 
+        if (canPlayerMove(2, bd)) {
+            player_two_move = choseMove(2, bd);
+            updateBoard(player_two_move, bd);
+        }
         showBoard(bd, false);
 
         /* ENDING TURN */

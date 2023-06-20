@@ -54,11 +54,11 @@ bool checkDirection(move m, board bd, int modifier_row, int modifier_col, bool m
     bool self_at_end = false;
 
     while ( (
-                ( modifier_row > 0 && row < bd.row_count - 1) || (modifier_row <= 0 && row > 0) 
+                ( modifier_row > 0 && row < bd.row_count - 1) || (modifier_row < 0 && row > 0) || (modifier_row == 0)
             )
             && 
             (
-                ( modifier_col > 0 && col < bd.col_count - 1) || (modifier_col <= 0 && col > 0) 
+                ( modifier_col > 0 && col < bd.col_count - 1) || (modifier_col <= 0 && col > 0) || (modifier_col == 0) 
             ) ) {
                 
         row = row + modifier_row;
@@ -82,11 +82,11 @@ bool checkDirection(move m, board bd, int modifier_row, int modifier_col, bool m
         bd.bd[idx(row,col,bd)] = m.player;
 
         while ( (
-                ( modifier_row > 0 && row < bd.row_count - 1) || (modifier_row <= 0 && row > 0) 
+                ( modifier_row > 0 && row < bd.row_count - 1) || (modifier_row <= 0 && row > 0) || (modifier_row == 0)
             )
             && 
             (
-                ( modifier_col > 0 && col < bd.col_count - 1) || (modifier_col <= 0 && col > 0) 
+                ( modifier_col > 0 && col < bd.col_count - 1) || (modifier_col <= 0 && col > 0) || (modifier_col == 0)
             ) ) {
             row = row + modifier_row;
             col = col + modifier_col;

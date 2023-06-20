@@ -8,6 +8,7 @@ bool moveIsPossible(move m, board bd);
 bool isEndingState(board bd);
 bool isPlayerWinning(int player, board bd);
 int getScore(board bd);
+bool canPlayerMove(int player, board bd);
 
 typedef struct move_size {
     move* tab;
